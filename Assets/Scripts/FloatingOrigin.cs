@@ -23,13 +23,20 @@ public class FloatingOrigin : MonoBehaviour
 
     ParticleSystem.Particle[] parts = null;
 
+    Object[] objects;
+
+    private void Awake()
+    {
+        objects = FindObjectsOfType(typeof(Transform));
+    }
+
     void LateUpdate()
     {
         Vector3 cameraPosition = gameObject.transform.position;
         cameraPosition.y = 0f;
         if (cameraPosition.magnitude > threshold)
         {
-            Object[] objects = FindObjectsOfType(typeof(Transform));
+            //Object[] objects = FindObjectsOfType(typeof(Transform));
             foreach (Object o in objects)
             {
                 Transform t = (Transform)o;

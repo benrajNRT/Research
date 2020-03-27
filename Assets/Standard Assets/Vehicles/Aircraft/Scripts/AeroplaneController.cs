@@ -42,6 +42,8 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         private Rigidbody m_Rigidbody;
 	    WheelCollider[] m_WheelColliders;
 
+        public Vector3d dpTransform;
+
 
         private void Start()
         {
@@ -88,8 +90,22 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             CalculateTorque();
 
             CalculateAltitude();
+
+            //PrecisionFloatValue();
         }
 
+        void PrecisionFloatValue ()
+        {
+            dpTransform = new Vector3d(transform.position.x, transform.position.y, transform.position.z);
+            if (dpTransform.x >= 100000 || dpTransform.y >= 100000 || dpTransform.z >= 100000)
+            {
+                Debug.LogWarning(dpTransform.x + ", " + dpTransform.y + ", " + dpTransform.z);
+            }
+            else
+            {
+                Debug.Log(dpTransform.x + ", " + dpTransform.y + ", " + dpTransform.z);
+            }
+        }
 
         private void ClampInputs()
         {
